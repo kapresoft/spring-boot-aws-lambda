@@ -29,8 +29,9 @@ public class Lambda {
                 .logStartupInfo(false);
         initProfile(builder);
 
+        // Retrieve dependent components from the application context
         appContext = builder.build().run();
-        this.environment = appContext.getEnvironment();
+        environment = appContext.getEnvironment();
         jsonUtils = appContext.getBean(JsonUtils.class);
     }
 
