@@ -49,8 +49,6 @@ function updateLambdaFunction() {
     eval ${cmd}
 }
 
-#--zip-file fileb://target/${archive}
-#uploadArchive && updateLambdaFunction
 if [[ "${update_only}" == "yes" ]]; then
     if [[ "${s3_enabled}" == "yes" ]]; then
         updateLambdaFunctionFromS3
@@ -66,7 +64,6 @@ else
     mvn package -P!sbmp,shade -DskipTests && updateLambdaFunction
 fi
 
-#mvn package -P!sbmp,shade -DskipTests && uploadArchive && updateLambdaFunctionFromS3
 
 
 
