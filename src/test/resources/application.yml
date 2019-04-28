@@ -1,0 +1,16 @@
+app:
+  version: 0.0.1
+  formatted-version: "v${app.version}"
+  java.version: "@java.version@"
+
+spring:
+  application:
+    name: "Lambda Spring Boot"
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    com.kapresoft: DEBUG
+
+message: "Hello World!"
+message2: "Khaleesi"
