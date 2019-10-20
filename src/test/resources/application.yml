@@ -5,12 +5,14 @@ app:
 
 spring:
   application:
-    name: "Lambda Spring Boot"
+    name: "Lambda Spring Boot (Test)"
+  profiles.active: dev
 
 logging:
   level:
     org.springframework.web: ERROR
     com.kapresoft: DEBUG
 
-message: "Hello World!"
-message2: "Khaleesi"
+motto:
+  house: "Tully"
+  message: "Family, Duty, Honor"

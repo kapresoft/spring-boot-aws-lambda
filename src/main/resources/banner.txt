@@ -1,6 +1,7 @@
 =========================================================
 ${AnsiColor.CYAN}:: Spring Boot :: ${spring-boot.formatted-version}${AnsiColor.WHITE}
 
-:: app          :: ${spring.application.name:} :: ${app.formatted-version}
-:: java.version :: ${java.version}
+:: app            :: ${spring.application.name:} :: ${app.formatted-version}
+:: java.version   :: ${java.version}
+:: active profile :: ${spring.profiles.active:}
 =========================================================

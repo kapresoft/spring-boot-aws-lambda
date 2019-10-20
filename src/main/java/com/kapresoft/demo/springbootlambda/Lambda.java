@@ -14,7 +14,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import java.util.Map;
 
 import static java.util.Optional.ofNullable;
-import static org.springframework.util.StringUtils.hasLength;
+import static org.springframework.util.StringUtils.arrayToCommaDelimitedString;
 
 public class Lambda {
 
@@ -27,26 +27,16 @@ public class Lambda {
     public Lambda() {
         final SpringApplicationBuilder builder = new SpringApplicationBuilder(Application.class)
                 .logStartupInfo(false);
-        initProfile(builder);
-
         // Retrieve dependent components from the application context
         appContext = builder.build().run();
         environment = appContext.getEnvironment();
         jsonUtils = appContext.getBean(JsonUtils.class);
     }
 
-    private void initProfile(SpringApplicationBuilder builder) {
-        final String environment = ofNullable(System.getenv("ENVIRONMENT")).orElse("default");
-        if (hasLength(environment)) {
-            log.info("Starting lambda with profile: {}", environment);
-            builder.profiles(environment);
-        }
-    }
-
     public LambdaResponse handler(Map<String, Object> request, Context context) {
-        log.info("Environment: {}", (Object[]) environment.getActiveProfiles());
-        log.info("Message #1: {}", environment.getProperty("message"));
-        log.info("Message #2: {}", environment.getProperty("message2"));
+        log.info("Active Profile(s): {}", arrayToCommaDelimitedString(environment.getActiveProfiles()));
+        log.info("House: {}", environment.getProperty("motto.house"));
+        log.info("Motto: {}", environment.getProperty("motto.message"));
         log.info("Input: {}", jsonUtils.toJson(request));
         log.info("Context: {}", ofNullable(context).map(c -> ReflectionToStringBuilder.toString(c, ToStringStyle.MULTI_LINE_STYLE))
                 .orElse(null));

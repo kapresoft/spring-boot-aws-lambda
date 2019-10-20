@@ -6,9 +6,11 @@ archive=spring-boot-lambda-${project_version}.jar
 archive_md5=$(md5 -q target/${archive})
 ts="$(date +%Y-%m-%d)-${archive_md5}"
 archiveS3=spring-boot-lambda-${project_version}-${ts}.jar
-s3Bucket=kapresoft
+s3Bucket=spring-boot-demo-04ff
+s3Region=us-west-2
 s3Key=lambda/${archiveS3}
 s3Uri=s3://${s3Bucket}/${s3Key}
+lambdaRegion=${s3Region}
 
 upload_only_opt=$1
 s3_enabled=no
@@ -32,7 +34,7 @@ function updateLambdaFunctionFromS3() {
 
     echo "Updating lambda function..."
     local cmd="aws lambda update-function-code \
-            --region us-east-1 \
+            --region ${s3Region} \
             --function-name spring-boot-demo \
             --s3-bucket ${s3Bucket} --s3-key ${s3Key}"
     echo Executing: ${cmd}
@@ -42,7 +44,7 @@ function updateLambdaFunctionFromS3() {
 function updateLambdaFunction() {
     echo "Updating lambda function..."
     local cmd="aws lambda update-function-code \
-            --region us-east-1 \
+            --region ${lambdaRegion} \
             --function-name spring-boot-demo \
             --zip-file fileb://target/${archive}"
     echo Executing: ${cmd}

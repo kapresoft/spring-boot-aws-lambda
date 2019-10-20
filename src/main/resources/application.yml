@@ -7,11 +7,13 @@ spring:
   application:
     name: "Lambda Spring Boot"
   output.ansi.enabled: detect
+  profiles.active: dev
 
 logging:
   level:
     org.springframework.web: ERROR
     com.kapresoft: DEBUG
 
-message: "Hello World!"
-message2: "Khaleesi"
+motto:
+  house: "Targaryen"
+  message: "Fire and Blood"

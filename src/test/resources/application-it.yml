@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: "Lambda Spring Boot (Integration Test)"
+
+motto:
+  house: "Tully"
+  message: "Family, Duty, Honor"
